@@ -52,21 +52,11 @@ pipeline {
  //    }
  //  }
     
-   stage('Docker Login'){
-     steps{
-       withCredentials([usernamePassword(credentialsId:'DockerID',usernameVariable:'DockerID')])
-       {
-         echo "Docker Logging In"  
-         sh "docker login -u ${DockerID} -p ${DockerID}"
-       }
-     }
-    }
-  
-   stage ('Push Docker Image'){
-     steps{
-       echo "Pushing Docker Image"
-       sh 'docker push arijitslg1/oauth2'
-     }
+  stage ('Push Docker image to DockerHub') { 
+      withCredentials([string(credentialsId: 'DockerID', variable: 'DockerID')]) { 
+        sh "docker login -u arijitslg1 -p ${DockerID}" 
+      } 
+        sh 'docker push arijitslg1/oauth2' 
     }
     
 //  stage ('Deploy Docker Image')
