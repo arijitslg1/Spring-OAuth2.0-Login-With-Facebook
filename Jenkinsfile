@@ -57,7 +57,7 @@ pipeline {
       withCredentials([usernamePassword(credentialsId: 'DockerID', passwordVariable: 'DockerID', usernameVariable: 'DockerID')]) { 
         sh "docker login -u arijitslg1 -p ${DockerID}" 
        } 
-        sh 'docker push arijitslg1/oauth2' 
+        sh 'docker push arijitslg1:oauth2' 
      }
   }
     
