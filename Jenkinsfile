@@ -27,14 +27,14 @@ pipeline {
      }
     }
    
-   stage('Junit Test'){
-     steps{
-       echo "Test Code"
-       dir("OAuth2.0"){
-         sh 'mvn test'
-       }
-     }
-    }
+   // stage('Junit Test'){
+   //  steps{
+   //    echo "Test Code"
+   //    dir("OAuth2.0"){
+   //      sh 'mvn test'
+   //    }
+   //  }
+   // }
    
    stage('Build Docker Image'){
      steps{
