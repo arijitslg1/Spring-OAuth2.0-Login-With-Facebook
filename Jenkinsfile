@@ -65,7 +65,7 @@ pipeline {
    stage ('Push Docker Image'){
      steps{
        echo "Pushing Docker Image"
-       sh "docker push docker:${env.BUILD_NUMBER}"
+       sh 'docker push arijitslg1/oauth2'
      }
     }
     
