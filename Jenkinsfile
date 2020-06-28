@@ -53,11 +53,13 @@ pipeline {
  //  }
     
   stage ('Push Docker image to DockerHub') { 
+    steps{
       withCredentials([string(credentialsId: 'DockerID', variable: 'DockerID')]) { 
         sh "docker login -u arijitslg1 -p ${DockerID}" 
-      } 
+       } 
         sh 'docker push arijitslg1/oauth2' 
-    }
+     }
+  }
     
 //  stage ('Deploy Docker Image')
 //    {
