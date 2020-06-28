@@ -1,4 +1,5 @@
 pipeline {
+ 
  agent any
    tools {
   // Install the Maven version configured as "M3" and add it to the path.
@@ -6,14 +7,14 @@ pipeline {
      jdk 'LocalJDK'
    }
   
-stages {
+ stages {
     
    stage('Pull Code') {
      steps {
        // Get code from a GitHub repository
-      echo "Pulling Code"
-      git 'https://github.com/arijitslg1/Spring-OAuth2.0-Login-With-Facebook.git'
-     }
+       echo "Pulling Code"
+       git 'https://github.com/arijitslg1/Spring-OAuth2.0-Login-With-Facebook.git'
+      }
     }
    
    stage('Build Code'){
@@ -21,28 +22,28 @@ stages {
        echo "Bulding Code"
        echo "M2_HOME = ${M2_HOME}"
        dir("OAuth2.0"){
-       sh 'mvn clean package'
+         sh 'mvn clean package'
       }
+     }
     }
-   }
    
    stage('Junit Test'){
      steps{
        echo "Test Code"
        dir("OAuth2.0"){
-       sh 'mvn test'
-      }
+         sh 'mvn test'
+       }
+     }
     }
-   }
    
    stage('Build Docker Image'){
      steps{
        dir("OAuth2.0"){
        echo "Building Docker Image"
        sh 'docker build -t oauth2 -f Dockerfile --no-cache .'
+      }
      }
     }
-   }
    
  //  stage('Tag Docker Image'){
  //    steps{
@@ -51,16 +52,15 @@ stages {
  //    }
  //  }
     
-  stage('Docker Login')
-    {
+   stage('Docker Login'){
      steps{
        withCredentials([usernamePassword(credentialsId:'DockerID',usernameVariable:'arijitslg1')])
-     {
-       echo "Docker Logging In"  
-       sh "docker login -u ${env.DockerID} -p ${DockerID}"
+       {
+         echo "Docker Logging In"  
+         sh "docker login -u ${env.DockerID} -p ${DockerID}"
+       }
      }
-   }
-  }
+    }
   
    stage ('Push Docker Image'){
      steps{
@@ -83,10 +83,4 @@ stages {
 //      }
 //     }
     }
- }
-post {
-   success {
-   echo "BUILD SUCCESS"
-   }
-  }
  }
