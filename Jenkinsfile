@@ -54,10 +54,10 @@ pipeline {
     
    stage('Docker Login'){
      steps{
-       withCredentials([usernamePassword(credentialsId:'DockerID',usernameVariable:'arijitslg1')])
+       withCredentials([usernamePassword(credentialsId:'DockerID',usernameVariable:'DockerID')])
        {
          echo "Docker Logging In"  
-         sh "docker login -u ${env.DockerID} -p ${DockerID}"
+         sh "docker login -u ${DockerID} -p ${DockerID}"
        }
      }
     }
