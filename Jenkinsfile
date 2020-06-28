@@ -40,7 +40,7 @@ pipeline {
      steps{
        dir("OAuth2.0"){
        echo "Building Docker Image"
-       sh 'docker build -t oauth2 -f Dockerfile --no-cache .'
+       sh 'docker build -t arijitslg1:oauth2 -f Dockerfile --no-cache .'
       }
      }
     }
