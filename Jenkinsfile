@@ -40,7 +40,7 @@ pipeline {
      steps{
        dir("OAuth2.0"){
        echo "Building Docker Image"
-       sh 'docker build -t arijitslg1:oauth2 -f Dockerfile --no-cache .'
+       sh 'docker build -t arijitslg1/oauth2:1 -f Dockerfile --no-cache .'
       }
      }
     }
@@ -57,7 +57,7 @@ pipeline {
       withCredentials([usernamePassword(credentialsId: 'DockerID', passwordVariable: 'DockerID', usernameVariable: 'DockerID')]) { 
         sh "docker login -u arijitslg1 -p ${DockerID}" 
        } 
-        sh 'docker push arijitslg1:oauth2' 
+        sh 'docker push arijitslg1/oauth2:1' 
      }
   }
     
